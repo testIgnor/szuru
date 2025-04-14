@@ -96,6 +96,7 @@ def display_image(newx, newy):
     nim = resize_image((newx, newy))
     image_frame.config(image=nim)
     image_frame.image = nim
+    generate_image_list(current_directory, reset_index=False)
 
 def update_image(event):
     global image_list
@@ -110,7 +111,6 @@ def generate_image_list(fpath, reset_index=True):
     image_list = [ x for x in glob.glob( os.path.join(fpath, '*.png') ) ]
     if reset_index:
         index = 0
-    display_image(root.winfo_width(), root.winfo_height())
 
 def reload_images_handler(event):
     reload_images()
@@ -127,6 +127,7 @@ def open_file_dialog():
         current_directory = file_path
         selected_folder_label.config(text=f"Selected Folder: {file_path}")
         generate_image_list(file_path)
+        display_image(root.winfo_width(), root.winfo_height())
 
 root = tk.Tk()
 root.configure( background = '#1f1f1f' )
