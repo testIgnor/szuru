@@ -87,7 +87,6 @@ def retreat_10(event):
 def resize_image(new_dims):
     global index
     global image_list
-    selected_file_label.config(text=f'Current Image: {index} / {len(image_list) - 1}')
     with Image.open(image_list[index]) as im:
         im.thumbnail( new_dims, Image.Resampling.LANCZOS )
         return ImageTk.PhotoImage(im)
@@ -111,6 +110,7 @@ def generate_image_list(fpath, reset_index=True):
     image_list = [ x for x in glob.glob( os.path.join(fpath, '*.png') ) ]
     if reset_index:
         index = 0
+    selected_file_label.config(text=f'Current Image: {index} / {len(image_list) - 1}')
 
 def reload_images_handler(event):
     reload_images()
